@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\Http\Middleware\CheckAbilities;
@@ -19,5 +20,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/cart', [CartController::class, 'view']);
     Route::post('/cart/{product_id}', [CartController::class, 'addToCart']);
     Route::delete('/cart/{product_id}', [CartController::class, 'remove']);
+    Route::get('/order', [OrderController::class, 'index']);
+    Route::post('/order', [OrderController::class, 'add']);
 });
 

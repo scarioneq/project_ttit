@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,10 +31,10 @@ class AuthController extends Controller
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return response()->json(['error' => 'Wrong email or password'], 401);
         }
-        if (Auth::attempt(['email' => 'admin@shop.ru', 'password' => 'QWEasd123'])) {
-            $user = Auth::user();
-            return $user->createToken('admin_token', ['admin'])->plainTextToken;
-        }
+//        if (Auth::attempt(['email' => 'admin@shop.ru', 'password' => 'QWEasd123'])) {
+//            $user = Auth::user();
+//            return $user->createToken('admin_token', ['admin'])->plainTextToken;
+//        }
         $user = Auth::user();
         $user->tokens()->delete();
         $token = $user->createToken('MyApp')->plainTextToken;
@@ -45,4 +46,10 @@ class AuthController extends Controller
         Auth::user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Logged out']);
     }
+
+//    public function grantAdmin(Request $request, $user_id)
+//    {
+//        $user = User::find()
+//
+//    }
 }

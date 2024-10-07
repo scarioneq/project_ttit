@@ -21,6 +21,8 @@ class CartController extends Controller
             [
                 'user_id' => Auth::id(),
                 'product_id' => $product_id,
+                'price' => $product->price,
+                'description' => $product->description,
             ],
         );
 

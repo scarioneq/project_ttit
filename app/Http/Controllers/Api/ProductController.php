@@ -17,11 +17,14 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        Gate::authorize('create', Product::class);
+        if (!Gate::authorize('create', Product::class)) {
+            return response()->json(['message' => 'Forbidden for you'], 403);
+        }
          $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric',
+
         ]);
         if ($validator->fails()) {
             return response()->json(['message' => 'Не правильно заполнены строки', 'errors' => $validator->errors()], 422);
