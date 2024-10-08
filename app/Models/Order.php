@@ -12,7 +12,7 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'product_id',
-        'order_price'
+        'total_amount',
     ];
 
     protected $hidden = [
@@ -24,8 +24,8 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function product()
+    public function products()
     {
-        return $this->belongsToMany(Product::class)->withPivot('price');
+        return $this->belongsToMany(Product::class, 'orders_products')->withPivot('price')->withTimestamps();
     }
 }

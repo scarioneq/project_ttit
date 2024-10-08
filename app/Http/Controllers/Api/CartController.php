@@ -16,7 +16,6 @@ class CartController extends Controller
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 429);
         }
-
         Cart::create(
             [
                 'user_id' => Auth::id(),
@@ -28,12 +27,10 @@ class CartController extends Controller
 
         return response()->json(['message' => 'Product add to card'], 201);
     }
-
-    // Просмотр своей корзины
     public function view()
     {
         $cartItems = Cart::where('user_id', Auth::id())
-            ->with('product') // Предполагается, что у вас есть связь с моделью Product
+            ->with('product')
             ->get();
 
         $responseData = $cartItems->map(function ($item) {
@@ -48,16 +45,17 @@ class CartController extends Controller
 
         return response()->json(['data' => $responseData], 200);
     }
-
-    // Удаление товара из корзины
-    public function remove($id)
+    public function remove($product_id)
     {
-        $cartItem = Cart::where('user_id', Auth::id())->where('id', $id)->first();
+        $userId = Auth::id();
 
+        $cartItem = Cart::where('user_id', $userId)->where('product_id', $product_id)->first();
         if (!$cartItem) {
             return response()->json(['message' => 'Forbidden for you'], 403);
         }
+
         $cartItem->delete();
+
         return response()->json(['message' => 'Item removed from cart'], 200);
     }
 }

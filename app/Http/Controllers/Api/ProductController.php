@@ -14,7 +14,6 @@ class ProductController extends Controller
     {
         return Product::all();
     }
-
     public function store(Request $request)
     {
         if (!Gate::authorize('create', Product::class)) {

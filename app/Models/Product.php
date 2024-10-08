@@ -13,11 +13,13 @@ class Product extends Model
         'description',
         'price',
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
     public function orders()
     {
         return $this->belongsToMany(Order::class)->withPivot('price');
     }
-
-
-
 }

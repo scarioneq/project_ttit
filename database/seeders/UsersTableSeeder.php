@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -20,15 +19,14 @@ class UsersTableSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@shop.ru',
             'password' => Hash::make('QWEasd123'),
-            'role' => 'admin', // Устанавливаем роль администратора
+            'role' => 'admin',
         ]);
 
-        // Создание клиента
         User::create([
             'name' => 'Client',
             'email' => 'user@shop.ru',
             'password' => Hash::make('password'),
-            'role' => 'client', // Роль клиента по умолчанию
+            'role' => 'client',
         ]);
     }
 }
