@@ -1,0 +1,504 @@
+{
+	"info": {
+		"_postman_id": "2f2d7f32-6051-48a0-b013-3378a78ee2a6",
+		"name": "project_ttit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38826388"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Чувачок\",\r\n    \"email\": \"admin@shop.ru\",\r\n    \"password\": \"QWEasd123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				},
+				"description": "Запрос нужен для регистрации пользователей, в запрос мы вводим данные ФИО, Емайл и пароль.\n\nВ ответе получаем user_token"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"user@shop.ru\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "Запрос нужен для авторизации пользователя в систему, отправляем емайл и пароль.\n\nВ ответе получаем user_token"
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "8|6JegWGLOouBAkCzFRz4AWoMyKxXFpV4Yf5ARVPIVbe1d36ff",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/logout",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"logout"
+					]
+				},
+				"description": "Запрос нужвен для удаления токена пользователя"
+			},
+			"response": []
+		},
+		{
+			"name": "Products List",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/products",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"products"
+					]
+				},
+				"description": "Запрос нужен для того, чтобы посмотреть весь список продуктов. В ответе получаем список продуктов, заранее добавленный администратором"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "10|VC6StqSy0MeFNtQB4iOlI1Ho11aQPSOEOXf6P0xIa96cc294",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"name\": \"Марайкуйа\",\r\n \"description\": \"Спеленькое\",\r\n \"price\": 300\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/product",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product"
+					]
+				},
+				"description": "Запрос нужен для создания продукта, создать продукт может только администратор (юзер с ролью admin)\n\nВ ответе получаем объет созданного продукта"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "10|VC6StqSy0MeFNtQB4iOlI1Ho11aQPSOEOXf6P0xIa96cc294",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/product/15",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product",
+						"15"
+					]
+				},
+				"description": "Запрос нужен для удаления продукта, использовать может только администратор.\n\nНа выходе получаем json с сообщением об успешности удаления продукта"
+			},
+			"response": []
+		},
+		{
+			"name": "Update product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "10|VC6StqSy0MeFNtQB4iOlI1Ho11aQPSOEOXf6P0xIa96cc294",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"price\": \"100\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/product/13",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product",
+						"13"
+					]
+				},
+				"description": "Запрос нужен для изменения одного или нескольких параметров объекта, может запросить только администратор\n\nНа выходе получаем json с успешностью запроса"
+			},
+			"response": []
+		},
+		{
+			"name": "check cart",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 1|nC2nC4c36Lz0cBIrmvr5EnmQYJ9YumofamW5x2Fh9840a5f5",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/cart",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cart"
+					]
+				},
+				"description": "Запрос нужен для просмотра корзины, запросить может пользователь и на выходе он получит свою корзину"
+			},
+			"response": []
+		},
+		{
+			"name": "add to cart",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 2|VVBMnuW7VccUJTCi9LTpknGlbPJXXaHtR9lvL3EZ14ed2f9c",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/cart/3",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cart",
+						"3"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				},
+				"description": "Запрос нужен для добавления товаров в корзину конкретного пользователя, на выходе получаем json с успешностью запроса"
+			},
+			"response": []
+		},
+		{
+			"name": "delete product",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 2|VVBMnuW7VccUJTCi9LTpknGlbPJXXaHtR9lvL3EZ14ed2f9c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/cart/3",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"cart",
+						"3"
+					]
+				},
+				"description": "Запрос нужен для удаления продукта из корзины пользователя, на выходе получаем json с успешностью"
+			},
+			"response": []
+		},
+		{
+			"name": "check order",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 2|VVBMnuW7VccUJTCi9LTpknGlbPJXXaHtR9lvL3EZ14ed2f9c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/order",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"order"
+					]
+				},
+				"description": "Запрос нужен для проверки заказов контретного пользователя, на выходе получаем массив с айдишниками продукта и сумму всех товаров из корзины"
+			},
+			"response": []
+		},
+		{
+			"name": "order is cart",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 2|VVBMnuW7VccUJTCi9LTpknGlbPJXXaHtR9lvL3EZ14ed2f9c",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/order",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"order"
+					]
+				},
+				"description": "Запрос нужен для оформления заказа, на выходе получаем сумму продуктов, которые были в корзине"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		}
+	]
+}
